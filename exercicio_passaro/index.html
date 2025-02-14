@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <title>Exercício do Pássaro</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+
+//configurar o tamanho da página
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+var game = new Phaser.Game(config);
+
+//definir variante do pássaro
+var passarinho;
+
+//carregar as imagens
+function preload() {
+    this.load.image('bg', 'assets/bg_sky.png'); // Fundo
+    this.load.spritesheet('red bird', 'assets/bird-red.png', { frameWidth: 75, frameHeight: 75}); // Pássaro
+}
+
+//adicionar elementos na tela
+function create() {
+    this.add.image(400, 300, 'bg').setScale(1.2); // Adicionar fundo
+    passarinho = this.add.sprite(100, 300, 'red bird').setScale(1.3);
+
+    //animar o pássaro
+    this.anims.create({
+        key: 'fly',
+        frames: this.anims.generateFrameNumbers('red bird', { start: 0, end: 7 }),
+        frameRate: 10,
+        repeat: -1
+    });
+
+    passarinho.anims.play('fly', true);
+
+    //definir variáveis de movimento
+    //mover para a direita
+    passarinho.ida = true;
+    //começa descendo
+    passarinho.subindo = false; // Começa descendo
+}
+
+//ajustar a posição do pássaro
+function update() { 
+
+    //movimento horizontal
+    if (passarinho.x === 100) {
+        passarinho.setFlip(false, false);
+        passarinho.ida = true;
+    }
+    if (passarinho.x < 700 && passarinho.ida === true) {
+        passarinho.x += 5;
+    }
+    if (passarinho.x === 700) {
+        passarinho.setFlip(true, false);
+        passarinho.ida = false;
+    }
+    if (passarinho.x > 100 && passarinho.ida === false) {
+        passarinho.x -= 5;
+    }
+
+    //movimento vertical (voltar ao bater no limite inferior)
+    while (passarinho.y >= 600) {
+        passarinho.subindo = true;//começa a subir
+        break 
+    }
+    while (passarinho.y <= 0) {
+        passarinho.subindo = false; //começa a descer
+        break
+    }
+
+    //movimento vertical conforme a direção
+    if (passarinho.subindo) {
+        passarinho.y -= 5; //sobe
+    } else {
+        passarinho.y += 5; //desce
+    }
+}
+
+</script>
+
+</body>
+</html>
+    
