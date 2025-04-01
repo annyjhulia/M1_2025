@@ -1,0 +1,40 @@
+1. a) Os atributos definidos na classe Animal são: nome, espécie e idade.
+
+b) A classe AnimalSelvagem adiciona o atributo de habitat e o método exibirHabitat() para além dos que herdou da classe Animal por meio do parâmetro extends.
+
+2. c) A linha de código significa que a classe AnimalSelvagem herda de Animal, ou seja, herda seus atributos e métodos e é capaz de usá-los, além de adicionar outros.
+
+d) O que acontece ao utilizar o comando super(...) é a atribuição de valor de maneira simplificada, pois herda da classe mãe, reutilizando o código.
+
+3. e) Ao executar o comando, cria-se um novo objeto chamado "animal2", com os atributos de nome, espécie, idade e habitat como "Nala", "Leoa", 5 e "Savana Africana", respectivamente.
+
+f) Ao criar o animal1, adiciona-se o objeto à classe Animal, podendo receber os atributos de nome, espécie e idade. Já ao criar o animal2, adiciona-se o objeto à classe AnimalSelvagem, podendo receber os atributos de nome, espécie, idade e habitat.
+
+4. g) O método exibirInformacoes() pode ser utilizado tanto em animal1 quanto em animal2 já que é herdado da classe Animal pela classe AnimalSelvagem, utilizando atributos que são comuns às duas classes por também terem sido herdados.
+
+h) O método exibirHabitat() não está disponível em animal1 pois esse objeto faz parte da classe Animal, além do método não ser compartilhado entre as classes, não recebendo o atributo "habitat", impossibilitando o método de ser usado.
+
+5. i) A herança evita a duplicação do código por excluir a necessidade de atribuição de valor repetitiva em todas as classes em relação aos atributos e métodos, tornando o código modular.
+
+j) Para adicionar um novo método à todos os animais, como "dormir()", este deveria ser implementado na classe Animal, pois, por ser a classe mãe, permite que todos os objetos de sua classe e das classes que herdam de si possam utilizar o método.
+
+6. k) A saída exata do código é:
+Nome: Tico, Espécie: Macaco, Idade: 4
+Nome: Nala, Espécie: Leoa, Idade: 5
+Habitat natural: Savana Africana
+
+l) Ao remover a linha super(nome, especie, idade) do construtor da classe AnimalSelvagem, o código não seria executado a partir de um objeto da classe, pois seus atributos não estariam definidos, impossibilitando a execução do código.
+
+7. m e n)
+
+class AnimalDomestico extends Animal {
+	constructor(nome, especie, idade, nomeDono) {
+		super(nome, especie, idade);
+		this.nomeDono = nomeDono;
+	}
+
+	exibirDono() {
+	return `Dono de ${nome}: ${nomeDono}`;
+	}
+}
+
